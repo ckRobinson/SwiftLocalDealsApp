@@ -32,7 +32,8 @@ struct DealCard: View {
             AsyncImage(url: deal.product.imageUrl) { image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(minHeight: 200, maxHeight: 300)
             } placeholder: {
                 ProgressView()
                     .frame(maxWidth: .infinity, minHeight: 100)
@@ -44,10 +45,14 @@ struct DealCard: View {
             Text("\(deal.rawData.title)")
                 .font(.body.weight(.bold))
                 .padding(.horizontal)
+                .multilineTextAlignment(.leading)
             
-            Text(deal.priceString)
-                .font(.footnote)
-                .padding(.horizontal)
+            HStack {
+                Text(deal.priceString)
+                    .font(.footnote)
+                    .padding(.horizontal)
+                Spacer()
+            }
             
             Divider()
                 .padding(.horizontal)
@@ -56,21 +61,18 @@ struct DealCard: View {
                 .font(.caption)
                 .padding(.horizontal)
                 .padding(.vertical)
+                .multilineTextAlignment(.leading)
             
             HStack {
-                HStack {
-                    Image(systemName: "hand.thumbsup.fill")
-                    Text("\(deal.rawData.likes.count)")
-                }
-                .cornerRadius(10)
+                Image(systemName: "hand.thumbsup.fill")
+                Text("\(deal.rawData.likes.count)")
                 
                 Divider()
                 
-                HStack {
-                    Image(systemName: "hand.thumbsdown.fill")
-                    Text("\(deal.rawData.dislikes.count)")
-                }
+                Image(systemName: "hand.thumbsdown.fill")
+                Text("\(deal.rawData.dislikes.count)")
             }
+            .frame(maxHeight: 1)
             .padding(.horizontal)
             .padding(.bottom)
         }
