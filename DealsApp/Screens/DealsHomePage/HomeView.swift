@@ -11,12 +11,21 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel();
     var body: some View {
-        ScrollView {
-
-            ForEach(viewModel.deals) { deal in
+        
+        NavigationStack() {
+            ScrollView {
                 
-                DealCard(deal: deal)
+                ForEach(viewModel.deals) { deal in
+                    
+                    NavigationLink(destination: {
+                        
+                    }, label: {
+                        DealCard(deal: deal)
+                            .foregroundColor(.black)
+                    })
+                }
             }
+            .navigationTitle("Home")
         }
     }
 }
