@@ -42,7 +42,7 @@ struct DealCard: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(minHeight: 200, maxHeight: 300)
+                    .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 300)
             } placeholder: {
                 ProgressView()
                     .frame(maxWidth: .infinity, minHeight: 100)
