@@ -80,6 +80,12 @@ struct DealCard: View {
                 
                 Image(systemName: "hand.thumbsdown.fill")
                 Text("\(deal.rawData.dislikes.count)")
+                
+                Spacer()
+                 
+                Text(deal.lastUpdate)
+                    .font(.caption)
+                    .fontWeight(.light)
             }
             .frame(maxHeight: 1)
             .padding(.horizontal)
