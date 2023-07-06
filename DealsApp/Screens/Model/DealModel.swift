@@ -29,19 +29,19 @@ struct DealData: Identifiable{
 struct ProductData {
     
     let rawData: ApiProductData;
-    let imageUrl: URL?;
+    var imageUrl: URL? = nil;
     
     init(rawData: ApiProductData) {
         
         self.rawData = rawData;
-        let url = URL(string: rawData.imageURL)
-        print("\(url)");
         
-        if let url = url {
-            self.imageUrl = url;
+        var imageUrlText = rawData.imageURL;
+        if(imageUrlText.hasPrefix("http:")) {
+            imageUrlText = imageUrlText.replacingOccurrences(of: "http:", with: "https:")
         }
-        else {
-            self.imageUrl = nil;
+        
+        if let url = URL(string: imageUrlText) {
+            self.imageUrl = url;
         }
     }
 }
