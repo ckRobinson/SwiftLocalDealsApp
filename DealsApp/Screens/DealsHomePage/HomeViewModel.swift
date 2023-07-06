@@ -8,7 +8,7 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-    // Call the fetch call using DealsService
+
     @Published var deals: [DealData] = [];
     let dealsService = DealsService();
     init() {
@@ -24,7 +24,7 @@ class HomeViewModel: ObservableObject {
         }
         catch {
             if let error = error as? APIError {
-                print(error);
+                print(error.description);
             }
             else {
                 print(error.localizedDescription);
