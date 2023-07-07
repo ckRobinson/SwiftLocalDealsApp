@@ -22,7 +22,6 @@ struct HomeView: View {
                         ItemDetailsView(dealData: deal)
                     }, label: {
                         DealCard(deal: deal)
-                            .foregroundColor(.black)
                     })
                 }
             }
