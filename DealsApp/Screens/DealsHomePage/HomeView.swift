@@ -42,6 +42,7 @@ struct DealCard: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .cornerRadius(15)
                     .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 300)
             } placeholder: {
                 ProgressView()
@@ -51,50 +52,68 @@ struct DealCard: View {
             .cornerRadius(15)
             .padding()
             
-            Text("\(deal.rawData.title)")
-                .font(.body.weight(.bold))
-                .padding(.horizontal)
-                .multilineTextAlignment(.leading)
-            
-            HStack {
-                Text(deal.priceString)
-                    .font(.footnote)
+            VStack {
+                Text("\(deal.rawData.title)")
+                    .font(.body.bold())
                     .padding(.horizontal)
-                Spacer()
-            }
-            
-            Divider()
-                .padding(.horizontal)
-            
-            Text(deal.rawData.description)
-                .font(.caption)
-                .padding(.horizontal)
-                .padding(.vertical)
-                .multilineTextAlignment(.leading)
-            
-            HStack {
-                Image(systemName: "hand.thumbsup.fill")
-                Text("\(deal.rawData.likes.count)")
+                    .padding(.top)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    Text(deal.priceString)
+                        .font(.body)
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color("LightAccent"))
+                        .padding(.horizontal)
+                    Spacer()
+                }
+                
                 
                 Divider()
+                    .padding(.horizontal)
+                    .background(.white)
                 
-                Image(systemName: "hand.thumbsdown.fill")
-                Text("\(deal.rawData.dislikes.count)")
+                Text(deal.rawData.description)
+                    .font(.footnote)
+                    .lineSpacing(4)
+                    .padding(.vertical)
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.leading)
                 
-                Spacer()
-                 
-                Text(deal.lastUpdate)
-                    .font(.caption)
-                    .fontWeight(.light)
+                HStack {
+                    Image(systemName: "hand.thumbsup.fill")
+                    Text("\(deal.rawData.likes.count)")
+                    
+                    Divider()
+                    
+                    Image(systemName: "hand.thumbsdown.fill")
+                    Text("\(deal.rawData.dislikes.count)")
+                    
+                    Spacer()
+                    
+                    Text(deal.lastUpdate)
+                        .font(.caption)
+                        .fontWeight(.light)
+                }
+                .frame(maxHeight: 1)
+                .padding(.horizontal)
+                .padding(.bottom)
             }
-            .frame(maxHeight: 1)
-            .padding(.horizontal)
-            .padding(.bottom)
+            .background(Color("DarkAccent"))
+            .foregroundColor(.white)
+            .padding(.top)
         }
         .background(.white)
+        .foregroundColor(Color("DarkAccent"))
         .cornerRadius(15)
-        .padding()
         .shadow(radius: 4, x: 3, y: 3)
+        .overlay(content: {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(Color("DarkAccent"), lineWidth: 5)
+        })
+        .padding()
     }
 }
 
