@@ -24,7 +24,11 @@ struct RelatedItemsView: View {
                 HStack {
                     ForEach(relatedDeals) { deal in
                         
-                        RelatedItemCard(deal: deal)
+                        NavigationLink(destination: {
+                            ItemDetailsView(dealData: deal)
+                        }, label: {
+                            RelatedItemCard(deal: deal)
+                        })
                     }
                 }
             }
