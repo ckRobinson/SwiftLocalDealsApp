@@ -15,6 +15,11 @@ struct ItemDetailsView: View {
             CoreContent
             buyButtonBar
         }
+        .navigationBarTitle("", displayMode: .inline)
+        .toolbarBackground(Color("DarkAccent"), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        /// https://swiftuirecipes.com/blog/swiftui-toolbar-placement-cheatsheet
     }
     
     var buyButtonBar: some View {
@@ -55,7 +60,7 @@ struct ItemDetailsView: View {
         ScrollView {
 
             ProductImage
-                .padding(.bottom)
+                .padding(.vertical)
             
             Text(dealData.rawData.title)
                 .font(.headline.bold())

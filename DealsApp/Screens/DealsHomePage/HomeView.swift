@@ -27,6 +27,10 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("Local Deals")
+            .toolbarBackground(Color("DarkAccent"), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            /// https://sarunw.com/posts/swiftui-navigation-bar-color/
         }
         .searchable(text: $searchText)
     }
