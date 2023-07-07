@@ -19,6 +19,7 @@
 		7C2AFD622A53056700BA663D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AFD612A53056700BA663D /* HomeViewModel.swift */; };
 		7C2AFD642A5305B900BA663D /* getDealsWithAugments.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AFD632A5305B900BA663D /* getDealsWithAugments.json */; };
 		7E7E2D942A57811800B2A93B /* ItemCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E2D932A57811800B2A93B /* ItemCommentsView.swift */; };
+		7E7E2D962A58B9A500B2A93B /* HomeViewDealCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E2D952A58B9A500B2A93B /* HomeViewDealCard.swift */; };
 		7EB262C32A532D9E0093BAAB /* DealAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB262C22A532D9E0093BAAB /* DealAPIModel.swift */; };
 		7EB262C52A538F0B0093BAAB /* DealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB262C42A538F0B0093BAAB /* DealModel.swift */; };
 		7EB262E42A54CD410093BAAB /* ItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB262E32A54CD410093BAAB /* ItemDetailsView.swift */; };
@@ -57,6 +58,7 @@
 		7C2AFD612A53056700BA663D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7C2AFD632A5305B900BA663D /* getDealsWithAugments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getDealsWithAugments.json; sourceTree = "<group>"; };
 		7E7E2D932A57811800B2A93B /* ItemCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCommentsView.swift; sourceTree = "<group>"; };
+		7E7E2D952A58B9A500B2A93B /* HomeViewDealCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDealCard.swift; sourceTree = "<group>"; };
 		7EB262C22A532D9E0093BAAB /* DealAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealAPIModel.swift; sourceTree = "<group>"; };
 		7EB262C42A538F0B0093BAAB /* DealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealModel.swift; sourceTree = "<group>"; };
 		7EB262E32A54CD410093BAAB /* ItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsView.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				7C2AFD2E2A53043500BA663D /* HomeView.swift */,
 				7C2AFD612A53056700BA663D /* HomeViewModel.swift */,
+				7E7E2D952A58B9A500B2A93B /* HomeViewDealCard.swift */,
 			);
 			path = DealsHomePage;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				7C2AFD2D2A53043500BA663D /* DealsAppApp.swift in Sources */,
 				7EB262C52A538F0B0093BAAB /* DealModel.swift in Sources */,
 				7C2AFD5E2A5304FA00BA663D /* APIError.swift in Sources */,
+				7E7E2D962A58B9A500B2A93B /* HomeViewDealCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
