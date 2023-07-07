@@ -12,16 +12,27 @@ struct ItemCommentsView: View {
     let comments: [Comment]
     var body: some View {
         
-        ScrollView {
-            ForEach(self.comments, id: \.self.id) { comment in
+        VStack {
+            
+            Text("User Reviews")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            ForEach(Array(self.comments.enumerated()), id: \.element.id) { index, comment in
                 
                 CommentView(commentData: comment)
                     .padding(.bottom)
                 
-                Divider()
-                    .padding(.horizontal)
-                    .padding(.bottom)
+                if(index < comments.count - 1) {
+                    Divider()
+                        .padding(.bottom)
+                }
             }
+        }
+        .padding()
+        .cornerRadius(15)
+        .overlay() {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(.gray.opacity(0.5))
         }
     }
 }
@@ -51,7 +62,6 @@ private struct CommentView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
         }
-        .padding(.horizontal)
     }
 }
 
