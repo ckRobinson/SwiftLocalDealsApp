@@ -13,7 +13,7 @@ struct ItemDetailsView: View {
     var body: some View {
         ZStack {
             CoreContent
-            buyButtonBar
+            BuyButtonBar
         }
         .navigationBarTitle("", displayMode: .inline)
         .toolbarBackground(Color("DarkAccent"), for: .navigationBar)
@@ -22,7 +22,7 @@ struct ItemDetailsView: View {
         /// https://swiftuirecipes.com/blog/swiftui-toolbar-placement-cheatsheet
     }
     
-    var buyButtonBar: some View {
+    var BuyButtonBar: some View {
         
         VStack {
             
@@ -35,25 +35,34 @@ struct ItemDetailsView: View {
                     .foregroundColor(.white)
                 
                 VStack {
-                    Button(action: {}) {
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(Color("LightAccent"))
-                                .frame(maxWidth: .infinity, maxHeight: 30)
-                                .cornerRadius(15)
-                                .padding(.horizontal)
-                                
-                            Text("Buy Now")
-                                .frame(maxWidth: .infinity)
-                                .foregroundColor(.white)
+                    Button(action: {
+                        if let url = dealData.itemURL {
+                            print("Opening URL.")
+                            UIApplication.shared.open(url)
                         }
+                    }) {
+                        BuyButtonView
                     }
-                    .padding(.bottom)
-                    .shadow(radius: 4, x: 3, y: 3)
                 }
             }
         }
         .ignoresSafeArea(.all)
+    }
+    
+    var BuyButtonView: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color("LightAccent"))
+                .frame(maxWidth: .infinity, maxHeight: 30)
+                .cornerRadius(15)
+                .padding(.horizontal)
+                
+            Text("Buy Now")
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
+        }
+        .padding(.bottom)
+        .shadow(radius: 4, x: 3, y: 3)
     }
     
     var CoreContent: some View {
