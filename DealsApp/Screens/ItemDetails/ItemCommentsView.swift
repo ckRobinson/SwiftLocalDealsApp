@@ -12,24 +12,32 @@ struct ItemCommentsView: View {
     let comments: [Comment]
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            Text("User Reviews")
-                .frame(maxWidth: .infinity, alignment: .leading)
+            Rectangle()
+                .foregroundColor(.white)
+                .cornerRadius(15)
+                .shadow(radius: 4, x: 3, y: 3)
             
-            ForEach(Array(self.comments.enumerated()), id: \.element.id) { index, comment in
+            VStack {
                 
-                CommentView(commentData: comment)
-                    .padding(.bottom)
+                Text("User Reviews")
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
-                if(index < comments.count - 1) {
-                    Divider()
+                ForEach(Array(self.comments.enumerated()), id: \.element.id) { index, comment in
+                    
+                    CommentView(commentData: comment)
                         .padding(.bottom)
+                    
+                    if(index < comments.count - 1) {
+                        Divider()
+                            .padding(.bottom)
+                    }
                 }
             }
+            .padding()
+            .cornerRadius(15)
         }
-        .padding()
-        .cornerRadius(15)
         .overlay() {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.gray.opacity(0.5))
@@ -49,7 +57,8 @@ private struct CommentView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20)
                     .padding(.all, 5)
-                    .background(.gray)
+                    .background(Color("DarkAccent"))
+                    .foregroundColor(.white)
                     .clipShape(Circle())
                 
                 Text(commentData.user.name)
