@@ -69,18 +69,51 @@ struct ItemDetailsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                         
+            UserRatings
+                .padding(.horizontal)
+                .shadow(radius: 4, x: 3, y: 3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
             ProductDescription
                 .padding()
-            
-//            ProductActivity
-//                .padding(.horizontal)
-//                .shadow(radius: 4, x: 3, y: 3)
             
             ItemCommentsView(comments: dealData.rawData.comments)
                 .padding(.horizontal)
             
             Spacer(minLength: 50)
         }
+    }
+    
+    var UserRatings: some View {
+        
+        VStack {
+            Text("Deal Rating:")
+                .font(.footnote)
+            HStack {
+                
+                Image(systemName: "hand.thumbsup.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 13)
+                Text("\(dealData.rawData.likes.count)")
+                    .font(.footnote)
+                
+                Divider()
+                    .background(.white)
+                
+                Image(systemName: "hand.thumbsdown.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 13)
+                Text("\(dealData.rawData.dislikes.count)")
+                    .font(.footnote)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 2)
+        .background(Color("DarkAccent"))
+        .foregroundColor(.white)
+        .cornerRadius(15)
     }
     
     var ProductImage: some View {
@@ -117,6 +150,11 @@ struct ItemDetailsView: View {
                 .font(.footnote)
                 .lineSpacing(4)
         }
+        .padding()
+        .background(Color("DarkAccent"))
+        .foregroundColor(.white)
+        .cornerRadius(15)
+        .shadow(radius: 4, x: 3, y: 3)
     }
 }
 
