@@ -69,5 +69,17 @@ struct User: Codable {
 }
 
 struct UserLikes: Codable {
+    let likedDeal: LikedDeal;
     
+    enum CodingKeys: String, CodingKey {
+        case likedDeal = "deal"
+    }
+}
+
+struct LikedDeal: Codable {
+    let dealID: String
+    
+    enum CodingKeys: String, CodingKey {
+        case dealID = "id"
+    }
 }
