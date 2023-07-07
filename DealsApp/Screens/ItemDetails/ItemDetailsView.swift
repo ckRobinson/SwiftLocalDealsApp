@@ -25,21 +25,26 @@ struct ItemDetailsView: View {
             
             ZStack {
                 Rectangle()
-                    .border(.gray)
+                    .border(.gray.opacity(0.5))
                     .frame(maxWidth: .infinity, maxHeight: 75)
                     .foregroundColor(.white)
                 
-                Button(action: {}) {
-                    
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.gray)
-                            .frame(width: 125, height: 30)
-                            .cornerRadius(15)
-                        Text("Buy Now")
-                            .frame(width: 150)
-                            .foregroundColor(.white)
+                VStack {
+                    Button(action: {}) {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(Color("LightAccent"))
+                                .frame(maxWidth: .infinity, maxHeight: 30)
+                                .cornerRadius(15)
+                                .padding(.horizontal)
+                                
+                            Text("Buy Now")
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.white)
+                        }
                     }
+                    .padding(.bottom)
+                    .shadow(radius: 4, x: 3, y: 3)
                 }
             }
         }
@@ -48,64 +53,70 @@ struct ItemDetailsView: View {
     
     var CoreContent: some View {
         ScrollView {
-            AsyncImage(url: dealData.product.imageUrl) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                ProgressView()
-                    .frame(maxWidth: .infinity, minHeight: 100)
-//                    .padding()
-            }
-            .cornerRadius(15)
-            .padding(.vertical)
+
+            ProductImage
+                .padding(.bottom)
             
             Text(dealData.rawData.title)
-                .font(.body)
+                .font(.headline.bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
             
-            Divider()
+            Text(dealData.priceString)
+                .font(.body)
+                .fontWeight(.heavy)
+                .foregroundColor(Color("LightAccent"))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                        
+            ProductDescription
+                .padding()
             
-            HStack {
-                VStack {
-                    
-                    Text("Likes")
-                        .font(.footnote.bold())
-                    Image(systemName: "hand.thumbsup.fill")
-                    Text("\(dealData.rawData.likes.count)")
-                }
-                .frame(maxWidth: .infinity)
-                
-                VStack {
-                    Text("Dislikes")
-                        .font(.footnote.bold())
-                    Image(systemName: "hand.thumbsdown.fill")
-                    Text("\(dealData.rawData.dislikes.count)")
-                }
-                .frame(maxWidth: .infinity)
-                
-                VStack {
-                    Text("Comments")
-                        .font(.footnote.bold())
-                    Image(systemName: "text.bubble")
-                    Text("\(dealData.rawData.comments.count)")
-                }
-                .frame(maxWidth: .infinity)
-            }
+//            ProductActivity
+//                .padding(.horizontal)
+//                .shadow(radius: 4, x: 3, y: 3)
             
-            Divider()
+            ItemCommentsView(comments: dealData.rawData.comments)
+                .padding(.horizontal)
             
+            Spacer(minLength: 50)
+        }
+    }
+    
+    var ProductImage: some View {
+
+        AsyncImage(url: dealData.product.imageUrl) { image in
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        } placeholder: {
+            ProgressView()
+                .frame(maxWidth: .infinity, minHeight: 100)
+        }
+        .frame(width: 250)
+        .padding(.vertical)
+        .cornerRadius(15)
+        .padding()
+        .overlay() {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(Color("DarkAccent"), lineWidth: 7)
+        }
+    }
+        
+    var ProductDescription: some View {
+        
+        VStack {
             Text("Product Desription:")
-                .font(.footnote)
+                .font(.callout)
                 .fontWeight(.medium)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 5)
+            
+            Divider()
+            
             Text(dealData.rawData.product.description)
                 .font(.footnote)
-            
-            Spacer(minLength: 75)
+                .lineSpacing(4)
         }
-        .padding(.horizontal)
     }
 }
 
@@ -120,7 +131,7 @@ private struct ItemDetail_PreviewWrapper: View {
     let dealData: DealData
     init() {
         let viewModel: HomeViewModel = HomeViewModel();
-        self.dealData = viewModel.deals[0];
+        self.dealData = viewModel.deals[1];
     }
     
     var body: some View {
