@@ -65,26 +65,7 @@ struct Comment: Codable {
 struct User: Codable {
     let id: String?;
     let name: String;
-    let likes: [UserLikes]
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        
-        if(container.contains(.id)) {
-            self.id = try container.decode(String.self, forKey: .id)
-        }
-        else {
-            self.id = nil;
-        }
-        
-        if(container.contains(.likes)) {
-            self.likes = try container.decode([UserLikes].self, forKey: .likes)
-        }
-        else {
-            self.likes = []
-        }
-    }
+    let likes: [UserLikes]?;
 }
 
 struct UserLikes: Codable {

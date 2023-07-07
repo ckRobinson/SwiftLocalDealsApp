@@ -11,6 +11,7 @@ struct DealData: Identifiable{
     let id: String;
     let rawData: ApiDealData;
     let product: ProductData;
+    let itemURL: URL?;
     
     private var updatedAtDT: Date? = nil;
     var lastUpdate: String {
@@ -35,6 +36,8 @@ struct DealData: Identifiable{
         self.rawData = rawData;
         self.id = rawData.id;
         self.product = ProductData(rawData: self.rawData.product);
+        
+        self.itemURL = URL(string: rawData.url);
         
         self.price = Float(rawData.price) / 100.0;
         
