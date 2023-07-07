@@ -13,9 +13,11 @@ struct RelatedItemsView: View {
     var body: some View {
         VStack {
             Text("Users who liked this item also liked:")
-                .font(.footnote)
+                .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
+                .padding(.top)
+                .foregroundColor(Color("DarkAccent"))
             
             ScrollView(.horizontal) {
                 
@@ -26,6 +28,10 @@ struct RelatedItemsView: View {
                     }
                 }
             }
+        }
+        .overlay() {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(.gray.opacity(0.5))
         }
     }
 }
