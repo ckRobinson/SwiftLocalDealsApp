@@ -10,9 +10,11 @@ import SwiftUI
 struct RelatedItemsView: View {
     
     @ObservedObject var viewModel: RelatedItemsViewModel = RelatedItemsViewModel()
+    @Binding var path: NavigationPath;
     
-    init(parentDeal: DealData) {
-        viewModel.getRelatedItemsFromParent(parentDeal);
+    init(parentDeal: DealData, path: Binding<NavigationPath>) {
+        self._path = path;
+        self.viewModel.getRelatedItemsFromParent(parentDeal);
     }
     
     var body: some View {
@@ -31,7 +33,7 @@ struct RelatedItemsView: View {
                         ForEach(viewModel.relatedItems) { deal in
                             
                             NavigationLink(destination: {
-                                ItemDetailsView(dealData: deal)
+                                ItemDetailsView(dealData: deal, path: $path)
                             }, label: {
                                 RelatedItemCard(deal: deal)
                             })
@@ -117,12 +119,14 @@ struct RelatedItemsView_Previews: PreviewProvider {
 private struct RelatedItemsView_PreviewWrapper: View {
     
     let dealData: DealData
+    @State var path: NavigationPath = NavigationPath();
+
     init() {
         let viewModel: HomeViewModel = HomeViewModel();
         self.dealData = viewModel.deals[0]
     }
     
     var body: some View {
-        RelatedItemsView(parentDeal: dealData);
+        RelatedItemsView(parentDeal: dealData, path: $path);
     }
 }

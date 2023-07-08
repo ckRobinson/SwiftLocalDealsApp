@@ -10,19 +10,18 @@ import SwiftUI
 struct HomeView: View {
     
     @State var searchText: String = "";
+    @State var path: NavigationPath = NavigationPath()
     @StateObject var viewModel: HomeViewModel = HomeViewModel();
     var body: some View {
         
-        NavigationStack() {
+        NavigationStack(path: $path) {
             ScrollView {
                 
                 ForEach(searchResults) { deal in
                     
-                    NavigationLink(destination: {
-                        ItemDetailsView(dealData: deal)
-                    }, label: {
+                    NavigationLink(value: searchResults[0].self) {
                         DealCard(deal: deal)
-                    })
+                    }
                 }
             }
             .navigationTitle("Local Deals")
@@ -30,6 +29,9 @@ struct HomeView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             /// https://sarunw.com/posts/swiftui-navigation-bar-color/
+            .navigationDestination(for: DealData.self) { deal in
+                ItemDetailsView(dealData: deal, path: $path)
+            }
         }
         .searchable(text: $searchText)
     }

@@ -10,6 +10,8 @@ import SwiftUI
 struct ItemDetailsView: View {
     
     let dealData: DealData
+    @Binding var path: NavigationPath;
+    
     var body: some View {
         ZStack {
             CoreContent
@@ -19,6 +21,15 @@ struct ItemDetailsView: View {
         .toolbarBackground(Color("DarkAccent"), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    path.removeLast(path.count)
+                }, label: {
+                    Text("Home")
+                })
+            }
+        }
         /// https://swiftuirecipes.com/blog/swiftui-toolbar-placement-cheatsheet
     }
         
@@ -52,7 +63,7 @@ struct ItemDetailsView: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             
-            RelatedItemsView(parentDeal: dealData)
+            RelatedItemsView(parentDeal: dealData, path: $path)
                 .padding(.horizontal)
             
             Spacer(minLength: 50)
@@ -185,12 +196,13 @@ struct ItemDetailsView_Previews: PreviewProvider {
 private struct ItemDetail_PreviewWrapper: View {
     
     let dealData: DealData
+    @State var path: NavigationPath = NavigationPath();
     init() {
         let viewModel: HomeViewModel = HomeViewModel();
         self.dealData = viewModel.deals[1];
     }
     
     var body: some View {
-        ItemDetailsView(dealData: dealData);
+        ItemDetailsView(dealData: dealData, path: $path);
     }
 }
