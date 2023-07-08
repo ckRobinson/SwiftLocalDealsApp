@@ -29,19 +29,8 @@ class RelatedItemsViewModel: ObservableObject {
         
         for relatedItem in relatedItems {
             
-            do {
-                if let item = try dealService.fetchDealByID(relatedItem) {
-                    
-                    self.relatedItems.append(DealData(rawData: item))
-                }
-            }
-            catch {
-                if let error = error as? APIError {
-                    print(error.description);
-                }
-                else {
-                    print(error.localizedDescription);
-                }
+            if let item = dealService.fetchDealByID(relatedItem) {
+                self.relatedItems.append(DealData(rawData: item))
             }
         }
     }

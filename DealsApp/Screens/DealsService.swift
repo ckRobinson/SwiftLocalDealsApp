@@ -9,11 +9,11 @@ import Foundation
 
 class DealsService {
     
-    func fetchDeals() throws -> [ApiDealData] {
+    func fetchDeals() -> [ApiDealData] {
         return MockDatabase.shared.loadAllDeals()
     }
     
-    func fetchDealByID(_ id: String) throws -> ApiDealData? {
+    func fetchDealByID(_ id: String) -> ApiDealData? {
         return MockDatabase.shared.getDealByID(id)
     }
 }

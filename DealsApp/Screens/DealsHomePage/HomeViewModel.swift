@@ -16,19 +16,9 @@ class HomeViewModel: ObservableObject {
     }
     
     func loadDeals() {
-        do {
-            let rawDealData = try dealsService.fetchDeals();
-            self.deals = rawDealData.map({ item in
-                DealData(rawData: item);
-            })
-        }
-        catch {
-            if let error = error as? APIError {
-                print(error.description);
-            }
-            else {
-                print(error.localizedDescription);
-            }
-        }
+        let rawDealData = dealsService.fetchDeals();
+        self.deals = rawDealData.map({ item in
+            DealData(rawData: item);
+        })
     }
 }
