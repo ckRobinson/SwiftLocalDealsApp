@@ -94,6 +94,9 @@ struct ItemDetailsView: View {
             ItemCommentsView(comments: dealData.rawData.comments)
                 .padding(.horizontal)
             
+            RelatedItemsView(parentDeal: dealData)
+                .padding(.horizontal)
+            
             Spacer(minLength: 50)
         }
     }
