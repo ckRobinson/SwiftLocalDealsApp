@@ -21,7 +21,9 @@ struct ItemCommentsView: View {
             
             VStack {
                 
-                Text("User Reviews")
+                Text("User Reviews: \(comments.count)")
+                    .font(.body.bold())
+                    .foregroundColor(Color("DarkAccent"))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 ForEach(Array(self.comments.enumerated()), id: \.element.id) { index, comment in
@@ -63,6 +65,7 @@ private struct CommentView: View {
                 
                 Text(commentData.user.name)
                     .font(.footnote.bold())
+                    .foregroundColor(Color("DarkAccent"))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
