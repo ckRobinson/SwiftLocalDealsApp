@@ -10,18 +10,10 @@ import Foundation
 class DealsService {
     
     func fetchDeals() throws -> [ApiDealData] {
-        
-        guard let url = Bundle(for: type(of: self)).url(forResource: "getDealsWithAugments", withExtension: "json") else {
-            throw APIError.invalidUrl
-        }
-        
-        let data = try! Data(contentsOf: url)
-        
-        do {
-            let result = try JSONDecoder().decode(DealsResponse.self, from: data)
-            return result.data.deals
-        } catch {
-            throw APIError.decodingError
-        }
+        return MockDatabase.shared.loadAllDeals()
+    }
+    
+    func fetchDealByID(_ id: String) throws -> ApiDealData? {
+        return MockDatabase.shared.getDealByID(id)
     }
 }
