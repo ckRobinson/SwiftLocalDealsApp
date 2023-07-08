@@ -9,38 +9,43 @@ import SwiftUI
 
 struct RelatedItemsView: View {
     
-    @StateObject var viewModel: RelatedItemsViewModel = RelatedItemsViewModel()
+    @ObservedObject var viewModel: RelatedItemsViewModel = RelatedItemsViewModel()
     
     init(parentDeal: DealData) {
         viewModel.getRelatedItemsFromParent(parentDeal);
     }
     
     var body: some View {
-        VStack {
-            Text("Users who liked this item also liked:")
-                .font(.body)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .padding(.top)
-                .foregroundColor(Color("DarkAccent"))
-            
-            ScrollView(.horizontal) {
+        if self.viewModel.relatedItems.count > 0 {
+            VStack {
+                Text("Users who liked this item also liked:")
+                    .font(.body)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.top)
+                    .foregroundColor(Color("DarkAccent"))
                 
-                HStack {
-                    ForEach(viewModel.relatedItems) { deal in
-                        
-                        NavigationLink(destination: {
-                            ItemDetailsView(dealData: deal)
-                        }, label: {
-                            RelatedItemCard(deal: deal)
-                        })
+                ScrollView(.horizontal) {
+                    
+                    HStack {
+                        ForEach(viewModel.relatedItems) { deal in
+                            
+                            NavigationLink(destination: {
+                                ItemDetailsView(dealData: deal)
+                            }, label: {
+                                RelatedItemCard(deal: deal)
+                            })
+                        }
                     }
                 }
             }
+            .overlay() {
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(.gray.opacity(0.5))
+            }
         }
-        .overlay() {
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(.gray.opacity(0.5))
+        else {
+            EmptyView()
         }
     }
 }
