@@ -9,7 +9,12 @@ import SwiftUI
 
 struct RelatedItemsView: View {
     
-    let relatedDeals: [DealData];
+    @StateObject var viewModel: RelatedItemsViewModel = RelatedItemsViewModel()
+    
+    init(parentDeal: DealData) {
+        viewModel.getRelatedItemsFromParent(parentDeal);
+    }
+    
     var body: some View {
         VStack {
             Text("Users who liked this item also liked:")
@@ -22,7 +27,7 @@ struct RelatedItemsView: View {
             ScrollView(.horizontal) {
                 
                 HStack {
-                    ForEach(relatedDeals) { deal in
+                    ForEach(viewModel.relatedItems) { deal in
                         
                         NavigationLink(destination: {
                             ItemDetailsView(dealData: deal)
@@ -106,16 +111,13 @@ struct RelatedItemsView_Previews: PreviewProvider {
 
 private struct RelatedItemsView_PreviewWrapper: View {
     
-    let dealData: [DealData]
+    let dealData: DealData
     init() {
         let viewModel: HomeViewModel = HomeViewModel();
-        
-        let itemCount = viewModel.deals.count;
-        let slice = min(5, itemCount)
-        self.dealData = viewModel.deals[0..<slice].shuffled();
+        self.dealData = viewModel.deals[0]
     }
     
     var body: some View {
-        RelatedItemsView(relatedDeals: dealData);
+        RelatedItemsView(parentDeal: dealData);
     }
 }
