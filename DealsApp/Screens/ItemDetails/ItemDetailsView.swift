@@ -21,50 +21,7 @@ struct ItemDetailsView: View {
         .toolbarColorScheme(.dark, for: .navigationBar)
         /// https://swiftuirecipes.com/blog/swiftui-toolbar-placement-cheatsheet
     }
-    
-    var BuyButtonBar: some View {
         
-        VStack {
-            
-            Spacer()
-            
-            ZStack {
-                Rectangle()
-                    .border(.gray.opacity(0.5))
-                    .frame(maxWidth: .infinity, maxHeight: 75)
-                    .foregroundColor(.white)
-                
-                VStack {
-                    Button(action: {
-                        if let url = dealData.itemURL {
-                            print("Opening URL.")
-                            UIApplication.shared.open(url)
-                        }
-                    }) {
-                        BuyButtonView
-                    }
-                }
-            }
-        }
-        .ignoresSafeArea(.all)
-    }
-    
-    var BuyButtonView: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color("LightAccent"))
-                .frame(maxWidth: .infinity, maxHeight: 30)
-                .cornerRadius(15)
-                .padding(.horizontal)
-                
-            Text("Buy Now")
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
-        }
-        .padding(.bottom)
-        .shadow(radius: 4, x: 3, y: 3)
-    }
-    
     var CoreContent: some View {
         ScrollView {
 
@@ -171,6 +128,49 @@ struct ItemDetailsView: View {
         .background(Color("DarkAccent"))
         .foregroundColor(.white)
         .cornerRadius(15)
+        .shadow(radius: 4, x: 3, y: 3)
+    }
+    
+    var BuyButtonBar: some View {
+        
+        VStack {
+            
+            Spacer()
+            
+            ZStack {
+                Rectangle()
+                    .border(.gray.opacity(0.5))
+                    .frame(maxWidth: .infinity, maxHeight: 75)
+                    .foregroundColor(.white)
+                
+                VStack {
+                    Button(action: {
+                        if let url = dealData.itemURL {
+                            print("Opening URL.")
+                            UIApplication.shared.open(url)
+                        }
+                    }) {
+                        BuyButtonView
+                    }
+                }
+            }
+        }
+        .ignoresSafeArea(.all)
+    }
+    
+    var BuyButtonView: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color("LightAccent"))
+                .frame(maxWidth: .infinity, maxHeight: 30)
+                .cornerRadius(15)
+                .padding(.horizontal)
+                
+            Text("Buy Now")
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
+        }
+        .padding(.bottom)
         .shadow(radius: 4, x: 3, y: 3)
     }
 }
