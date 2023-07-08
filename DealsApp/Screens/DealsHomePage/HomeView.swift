@@ -34,6 +34,7 @@ struct HomeView: View {
         .searchable(text: $searchText)
     }
     
+    // TODO: Refactor this into a mockDB search rather than filtering here.
     var searchResults: [DealData] {
         if searchText.isEmpty {
             return viewModel.deals
