@@ -50,6 +50,7 @@ struct ItemDetailsView: View {
             
             ItemCommentsView(comments: dealData.rawData.comments)
                 .padding(.horizontal)
+                .padding(.bottom)
             
             RelatedItemsView(parentDeal: dealData)
                 .padding(.horizontal)
