@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DealData: Identifiable{
+struct DealData: Identifiable, Hashable {
     let id: String;
     let rawData: ApiDealData;
     let product: ProductData;
@@ -47,7 +47,7 @@ struct DealData: Identifiable{
     }
 }
 
-struct ProductData {
+struct ProductData: Hashable {
     
     let rawData: ApiProductData;
     var imageUrl: URL? = nil;

@@ -15,7 +15,7 @@ struct DealsResponseData: Codable {
     let deals: [ApiDealData]
 }
 
-struct ApiDealData: Codable, Identifiable {
+struct ApiDealData: Codable, Identifiable, Hashable {
     let id: String;
     let title: String;
     let url: String;
@@ -29,12 +29,12 @@ struct ApiDealData: Codable, Identifiable {
     let comments: [Comment];
 }
 
-struct Like: Codable {
+struct Like: Codable, Hashable {
     let id: String;
     let user: User;
 }
 
-struct ApiProductData: Codable {
+struct ApiProductData: Codable, Hashable {
     let availability: String;
     let imageURL: String;
     let description: String;
@@ -50,25 +50,25 @@ struct ApiProductData: Codable {
     }
 }
 
-struct Dislike: Codable {
+struct Dislike: Codable, Hashable {
     let id: String;
     let user: User;
 }
 
-struct Comment: Codable {
+struct Comment: Codable, Hashable {
     let id: String;
     let createdAt: String;
     let text: String;
     let user: User
 }
 
-struct User: Codable {
+struct User: Codable, Hashable {
     let id: String?;
     let name: String;
     let likes: [UserLikes]?;
 }
 
-struct UserLikes: Codable {
+struct UserLikes: Codable, Hashable {
     let likedDeal: LikedDeal;
     
     enum CodingKeys: String, CodingKey {
@@ -76,7 +76,7 @@ struct UserLikes: Codable {
     }
 }
 
-struct LikedDeal: Codable {
+struct LikedDeal: Codable, Hashable {
     let dealID: String
     
     enum CodingKeys: String, CodingKey {
