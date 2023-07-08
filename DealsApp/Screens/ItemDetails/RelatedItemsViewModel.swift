@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+class RelatedItemsViewModel: ObservableObject {
+    
+    @Published var relatedItems: [DealData] = []
+    let dealService: DealsService = DealsService();
+    
+    func getRelatedItemsFromParent(_ parentDeal: DealData) {
+        
+        
+    }
+}
