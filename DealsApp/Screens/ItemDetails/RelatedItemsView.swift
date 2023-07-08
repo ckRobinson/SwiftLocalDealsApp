@@ -19,7 +19,7 @@ struct RelatedItemsView: View {
         if self.viewModel.relatedItems.count > 0 {
             VStack {
                 Text("Users who liked this item also liked:")
-                    .font(.body)
+                    .font(.body.bold())
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                     .padding(.top)
